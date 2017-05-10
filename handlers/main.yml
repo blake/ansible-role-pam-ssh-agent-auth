@@ -2,5 +2,7 @@
 
 - name: sudo restart
   service:
-    name:  sudo
+    name: sudo
     state: restarted
+  when: ansible_service_mgr != 'systemd'
+

@@ -4,9 +4,10 @@
   package:
     name:  "{{ item }}"
     state: present
-    install_recommends: false
-    update_cache:       true
-    cache_valid_time:   3600
+    update_cache: true
+## not supported on yum
+#    install_recommends: false
+#    cache_valid_time:   3600
   with_items:
     - pam-ssh-agent-auth
     - sudo
