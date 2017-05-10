@@ -5,6 +5,7 @@
     dest:  /etc/sudoers
     block: |
       Defaults env_keep += SSH_AUTH_SOCK
+    backup: yes
   notify:
     - sudo restart
 
@@ -14,5 +15,6 @@
     insertbefore: '^@include common-auth'
     block: |
       auth sufficient pam_ssh_agent_auth.so file=%h/.ssh/authorized_keys
+    backup: yes
   notify:
     - sudo restart

@@ -34,6 +34,7 @@ script:
 after_failure:
   - "sudo tail -50 /var/log/syslog"
   - "sudo service --status-all"
+  - "sudo cat /etc/sudoers"
 
 notifications:
   webhooks: https://galaxy.ansible.com/api/v1/notifications/
