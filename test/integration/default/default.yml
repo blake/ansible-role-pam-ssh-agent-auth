@@ -1,0 +1,6 @@
+---
+
+- hosts: all
+  roles:
+    - manala.pam-ssh-agent-auth
+

@@ -1,7 +1,7 @@
 ---
 
 - name: install > Packages
-  apt:
+  package:
     name:  "{{ item }}"
     state: present
     install_recommends: false
@@ -9,3 +9,4 @@
     cache_valid_time:   3600
   with_items:
     - pam-ssh-agent-auth
+    - sudo

@@ -1,7 +1,5 @@
 ---
 
-dependencies: []
-
 galaxy_info:
 
   author:              Manala
@@ -18,3 +16,6 @@ galaxy_info:
     - system
     - auth
     - sudo
+
+dependencies:
+    - juju4.redhat-epel
