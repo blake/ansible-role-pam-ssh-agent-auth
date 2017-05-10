@@ -1,5 +1,8 @@
 ---
 
+- include: debian.yml
+  when: ansible_os_family == 'Debian'
+
 # Install
 - include: install.yml
   tags:
