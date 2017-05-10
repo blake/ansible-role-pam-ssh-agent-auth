@@ -8,6 +8,4 @@
 ## not supported on yum
 #    install_recommends: false
 #    cache_valid_time:   3600
-  with_items:
-    - pam-ssh-agent-auth
-    - sudo
+  with_items: "{{ pamsshagent_pkgs }}"

@@ -1,5 +1,8 @@
 ---
 
+- name: Include distribution version-specific variables
+  include_vars: "{{ ansible_distribution }}-{{ ansible_distribution_major_version|int }}.yml"
+
 - include: debian.yml
   when: ansible_os_family == 'Debian'
 
