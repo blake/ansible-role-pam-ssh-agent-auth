@@ -18,9 +18,8 @@ end
 
 describe file('/etc/sudoers') do
   it { should be_file }
-#  its(:content) { should match /Defaults env_keep += SSH_AUTH_SOCK/ }
-  its(:content) { should match /Defaults env_keep / }
-  its(:content) { should match /SSH_AUTH_SOCK/ }
+  its(:content) { should match /Defaults env_keep \+= SSH_AUTH_SOCK/ }
+  let(:sudo_options) { '-u root -H' }
 end
 
 describe file('/etc/pam.d/sudo') do
