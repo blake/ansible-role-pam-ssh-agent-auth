@@ -1,0 +1,5 @@
+---
+
+pamsshagent_pkgs:
+  - pam_ssh_agent_auth
+  - sudo
