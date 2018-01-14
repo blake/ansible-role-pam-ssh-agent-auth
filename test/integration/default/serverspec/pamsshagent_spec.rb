@@ -12,7 +12,10 @@ set :backend, :exec
 describe package('sudo') do
   it { should be_installed }
 end
-describe package('pam-ssh-agent-auth'), :if => os[:family] == 'ubuntu' do
+describe package('pam-ssh-agent-auth'), :if => os[:family] == 'ubuntu' && os[:release] == '16.04' do
+  it { should be_installed }
+end
+describe package('libpam-ssh-agent-auth'), :if => os[:family] == 'ubuntu' && os[:release] == '17.04' do
   it { should be_installed }
 end
 describe package('libpam-ssh-agent-auth'), :if => os[:family] == 'debian' do
