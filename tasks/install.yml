@@ -1,11 +1,11 @@
 ---
 
 - name: install > Packages
-  package:
+  apt:
     name:  "{{ item }}"
     state: present
-    update_cache: true
-## not supported on yum
-#    install_recommends: false
-#    cache_valid_time:   3600
-  with_items: "{{ pamsshagent_pkgs }}"
+    install_recommends: false
+    update_cache:       true
+    cache_valid_time:   3600
+  with_items:
+    - libpam-ssh-agent-auth

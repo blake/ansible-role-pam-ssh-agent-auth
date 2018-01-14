@@ -2,8 +2,5 @@
 
 - name: sudo restart
   service:
-    name: sudo
+    name:  sudo
     state: restarted
-  ignore_errors: true
-  when: ansible_service_mgr != 'systemd'
-
