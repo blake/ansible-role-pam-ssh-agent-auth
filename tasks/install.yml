@@ -7,8 +7,7 @@
     install_recommends: false
     update_cache:       true
     cache_valid_time:   3600
-  with_items:
-    - libpam-ssh-agent-auth
+  with_items: "{{ pamsshagent_pkgs }}"
   when: ansible_os_family == 'Debian'
 
 - name: RedHat install > Packages
@@ -16,6 +15,5 @@
     name:  "{{ item }}"
     state: present
     update_cache:       true
-  with_items:
-    - pam_ssh_agent_auth
+  with_items: "{{ pamsshagent_pkgs }}"
   when: ansible_os_family == 'RedHat'
