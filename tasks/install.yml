@@ -1,6 +1,6 @@
 ---
 
-- name: install > Packages
+- name: Debian install > Packages
   apt:
     name:  "{{ item }}"
     state: present
@@ -9,3 +9,13 @@
     cache_valid_time:   3600
   with_items:
     - libpam-ssh-agent-auth
+  when: ansible_os_family == 'Debian'
+
+- name: RedHat install > Packages
+  yum:
+    name:  "{{ item }}"
+    state: present
+    update_cache:       true
+  with_items:
+    - pam_ssh_agent_auth
+  when: ansible_os_family == 'RedHat'
