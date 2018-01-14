@@ -2,5 +2,6 @@
 
 - hosts: all
   roles:
+    - { role: juju4.redhat-epel, when: ansible_os_family == 'RedHat' }
     - manala.pam-ssh-agent-auth
 
