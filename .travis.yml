@@ -43,7 +43,7 @@ script:
   - export LANG=C.UTF-8
   - KITCHEN_YAML=.kitchen.docker.yml kitchen verify ${distribution}-${version//./}
 
-#after_failure:
+# after_failure:
 #  - "systemctl -l status"
 #  - "journalctl -xe --no-pager"
 

@@ -2,4 +2,3 @@
 
 pamsshagent_pkgs:
   - pam-ssh-agent-auth
-  - sudo

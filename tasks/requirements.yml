@@ -1,27 +1,10 @@
 ---
 
-- name: requirements > Sudo package check
-  command: "dpkg -s sudo"
-  check_mode: false
-  failed_when: false
-  changed_when: false
-  register: _elao_sudo_package_check_output
-  when: ansible_os_family == 'Debian'
+- name: Requirements > Sudo package check
+  ansible.builtin.package_facts:
+    manager: auto
 
-- name: requirements > Debian Sudo package check fail
-  fail:
+- name: Requirements > Sudo package check fail
+  ansible.builtin.fail:
     msg: Package "sudo" must be installed
-  when: ansible_os_family == 'Debian' and _elao_sudo_package_check_output.rc != 0
-
-- name: requirements > Sudo package check
-  command: "rpm -qi sudo"
-  check_mode: false
-  failed_when: false
-  changed_when: false
-  register: _elao_sudo_package_check_output2
-  when: ansible_os_family == 'RedHat'
-
-- name: requirements > RedHat Sudo package check fail
-  fail:
-    msg: Package "sudo" must be installed
-  when: ansible_os_family == 'RedHat' and _elao_sudo_package_check_output2.rc != 0
+  when: (ansible_facts.packages['sudo'] | length) == 0

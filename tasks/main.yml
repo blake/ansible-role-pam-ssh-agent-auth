@@ -1,19 +1,29 @@
 ---
 
 - name: Include distribution version-specific variables
-  include_vars: "{{ ansible_distribution }}-{{ ansible_distribution_major_version|int }}.yml"
+  ansible.builtin.include_vars: "{{ lookup('ansible.builtin.first_found', params) }}"
+  vars:
+    params:
+      files:
+        - "{{ ansible_distribution }}-{{ ansible_distribution_major_version | int }}.yml"
+        - "{{ ansible_os_family }}.yml"
+      paths:
+        - vars
 
 # Requirements
-- include: requirements.yml
+- name: Include requirements
+  ansible.builtin.include_tasks: requirements.yml
   tags:
     - manala_pam_ssh_agent_auth
 
 # Install
-- include: install.yml
+- name: Install packages
+  ansible.builtin.include_tasks: install.yml
   tags:
     - manala_pam_ssh_agent_auth
 
 # Sudo
-- include: sudo.yml
+- name: Configure sudo
+  ansible.builtin.include_tasks: sudo.yml
   tags:
     - manala_pam_ssh_agent_auth

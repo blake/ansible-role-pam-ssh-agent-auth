@@ -1,21 +1,21 @@
 ---
 
 - name: Debian install > Packages
-  apt:
-    name:  "{{ pamsshagent_pkgs }}"
+  ansible.builtin.apt:
+    name: "{{ pamsshagent_pkgs }}"
     state: present
     install_recommends: false
-    update_cache:       true
-    cache_valid_time:   3600
+    update_cache: true
+    cache_valid_time: 3600
   when: ansible_os_family == 'Debian'
   register: pkg_result
   until: pkg_result is success
 
 - name: RedHat install > Packages
-  yum:
-    name:  "{{ pamsshagent_pkgs }}"
+  ansible.builtin.yum:
+    name: "{{ pamsshagent_pkgs }}"
     state: present
-    update_cache:       true
+    update_cache: true
   when: ansible_os_family == 'RedHat'
   register: pkg_result
   until: pkg_result is success

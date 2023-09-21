@@ -1,5 +1,4 @@
 ---
-
 pamsshagent_pkgs:
   - libpam-ssh-agent-auth
-  - sudo
+
