@@ -1,18 +1,22 @@
 ---
 
-- name: Sudo > Sudoers
-  ansible.builtin.blockinfile:
-    dest: /etc/sudoers
-    block: |
-      Defaults env_keep += SSH_AUTH_SOCK
+- name: Install sudo config
+  ansible.builtin.copy:
+    dest: /etc/sudoers.d/99-pam-ssh-agent-auth
+    content: |
+      # This file is managed by Ansible as part of the pam-ssh-agent-auth role
+      {{ pamsshagentauth_sudoers_config }}
+    owner: root
+    mode: ug=r,o=
+    validate: /usr/sbin/visudo --check --file=%s
   notify:
-    - sudo restart
+    - Restart sudo
 
-- name: Sudo > Sudoers
+- name: Modify PAM configuration for sudo
   ansible.builtin.blockinfile:
     dest: /etc/pam.d/sudo
     insertbefore: '^@include common-auth'
     block: |
-      auth sufficient pam_ssh_agent_auth.so file=%h/.ssh/authorized_keys
+      auth {{ pamsshagentauth_pam_control }} {{ pamsshagentauth_pam_module_path }} {{ pamsshagentauth_pam_module_arguments }}
   notify:
-    - sudo restart
+    - Restart sudo
